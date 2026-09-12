@@ -1,0 +1,17 @@
+# 语料不随仓库分发（163 MB）。clone 之后跑
+#   python3 tools/build_corpus.py
+# 自己生成，脚本会自动去 HF 镜像拉原始数据。
+corpus/
+
+# 构建产物
+*.dmg
+*.app
+build/
+
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.pyc
