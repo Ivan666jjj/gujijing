@@ -12,7 +12,8 @@ import re
 import pandas as pd
 
 GH = "/tmp/corpus_gh"
-OUT = "/tmp/corpus_final"
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "..", "corpus")
 COMMON_MAX = 200_000
 KEEP = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fffA-Za-z0-9]")
 
@@ -24,8 +25,8 @@ def norm(s):
 os.makedirs(OUT, exist_ok=True)
 
 # ---- 1. 从 HF 数据里挑出「GitHub 没下到」的篇章 ----
-fails = {x for x in open("/tmp/gh_fails.txt", encoding="utf-8").read().split("\n") if x}
-df = pd.read_parquet("/tmp/cm.parquet", columns=["info", "classical", "modern"])
+fails = {x for x in open(os.path.join(HERE, "github_download_failed.txt"), encoding="utf-8").read().split("\n") if x}
+df = pd.read_parquet("/tmp/Chinese_modern_classical.parquet", columns=["info", "classical", "modern"])
 sub = df[df["info"].astype(str).isin(fails)]
 print("要补的条目：%d（来自 %d 个失败篇章）" % (len(sub), len(fails)))
 

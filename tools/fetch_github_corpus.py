@@ -18,7 +18,7 @@ CDN = [
 ]
 WORKERS = 16
 
-df = pd.read_parquet("/tmp/cm.parquet", columns=["info"])
+df = pd.read_parquet("/tmp/Chinese_modern_classical.parquet", columns=["info"])
 infos = sorted(set(df["info"].astype(str)))
 
 
